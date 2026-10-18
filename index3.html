@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edison Ordoñez — Soporte IT & Atención al Cliente</title>
+<meta name="description" content="Portafolio de Edison Ordoñez, estudiante de Ing. en Sistemas (EPN). Soporte IT, atención al cliente y desarrollo. Disponible para prácticas y roles junior.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf9f6; --surface:#ffffff; --ink:#1a1a1a; --muted:#6b6b6b;
+  --line:#e5e2dc; --accent:#1a5cff; --accent-soft:#eef2ff; --highlight:#ff5c1a;
+  --head:'Instrument Sans',system-ui,sans-serif;
+  --body:'Instrument Sans',system-ui,sans-serif;
+  --serif:'Newsreader',Georgia,serif;
+  --radius:12px;
+}
+[data-theme="dark"]{
+  --bg:#0f0f0f; --surface:#1a1a1a; --ink:#f0f0f0; --muted:#9a9a9a;
+  --line:#2a2a2a; --accent:#6b8aff; --accent-soft:#1a2240; --highlight:#ff7a45;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{
+  margin:0;font:400 1.0625rem/1.65 var(--body);color:var(--ink);background:var(--bg);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  transition:background .3s,color .3s;
+}
+h1,h2,h3,h4{margin:0;font-family:var(--head);line-height:1.15;text-wrap:balance;font-weight:600}
+p{margin:0;text-wrap:pretty}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.sr{position:absolute;left:-999px}
+.sr:focus{left:12px;top:12px;z-index:9999;background:var(--surface);padding:8px 14px;border-radius:8px}
+
+/* ---- Barra superior ---- */
+.topbar{
+  position:fixed;inset:0 0 auto 0;z-index:1000;
+  background:color-mix(in srgb,var(--bg) 85%,transparent);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  max-width:1120px;margin:auto;padding:12px 24px;
+  display:flex;align-items:center;gap:16px;
+}
+.brand{font:700 1.05rem var(--head);color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{
+  padding:7px 14px;border-radius:8px;text-decoration:none;
+  color:var(--muted);font-weight:500;font-size:.92rem;
+  transition:color .15s,background .15s;
+}
+.nav a:hover{color:var(--ink);background:var(--accent-soft)}
+.nav a.active{color:var(--accent);background:var(--accent-soft)}
+.icon-btn{
+  width:38px;height:38px;border-radius:8px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);cursor:pointer;font-size:1rem;
+  display:grid;place-items:center;transition:border-color .15s,background .15s;
+}
+.icon-btn:hover{border-color:var(--accent)}
+#menu-toggle{display:none}
+
+/* ---- Hero ---- */
+.hero{
+  min-height:100svh;display:grid;align-content:center;gap:20px;
+  padding:120px max(24px,calc((100vw - 1120px)/2)) 80px;
+  color:#fff;position:relative;isolation:isolate;
+  background:
+    linear-gradient(105deg,rgba(5,10,20,.92) 30%,rgba(5,10,20,.45) 75%),
+    url('watermarked_img_11058673127130078364.jpg') center/cover, #0a0f1a;
+}
+.hero-status{
+  display:inline-flex;align-items:center;gap:8px;width:fit-content;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  padding:6px 14px;border-radius:999px;font-size:.85rem;font-weight:500;
+  backdrop-filter:blur(6px);
+}
+.hero-status .dot{
+  width:7px;height:7px;border-radius:50%;background:#4ade80;
+  box-shadow:0 0 0 3px rgba(74,222,128,.3);animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,.3)}50%{box-shadow:0 0 0 6px rgba(74,222,128,.05)}}
+.hero h1{
+  font-size:clamp(2.6rem,7vw,5rem);letter-spacing:-.04em;line-height:1.02;
+  max-width:14ch;text-shadow:0 2px 20px rgba(0,0,0,.2);
+}
+.hero .sub{
+  font-size:clamp(1.05rem,2vw,1.3rem);color:#d0d8e8;max-width:50ch;
+  font-weight:400;line-height:1.5;
+}
+.hero .contact-row{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;
+}
+.hero .contact-row span{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+  padding:5px 12px;border-radius:8px;font-size:.88rem;color:#e0e6f0;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+
+/* ---- Botones ---- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font:600 .95rem var(--body);padding:13px 24px;border-radius:8px;
+  border:1.5px solid transparent;cursor:pointer;text-decoration:none;
+  transition:transform .1s,background .15s,border-color .15s,filter .15s;
+  white-space:nowrap;
+}
+.btn:active{transform:scale(.97)}
+.btn-solid{background:#fff;color:#0a0f1a}
+.btn-solid:hover{background:#e8edff}
+.btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+.btn-outline:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7)}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{filter:brightness(1.1)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ---- Layout principal ---- */
+.container{max-width:1120px;margin:auto;padding:0 24px}
+section{padding:88px 0 0}
+.section-label{
+  font:600 .78rem var(--body);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.section-label::before{content:"";width:24px;height:1.5px;background:var(--accent)}
+h2{font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-.03em;margin-bottom:10px}
+.lead{color:var(--muted);max-width:65ch;margin-bottom:36px;font-size:1.02rem}
+
+/* ---- Perfil / Resumen ---- */
+.profile-grid{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start;
+}
+.summary-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:32px;
+}
+.summary-card p{color:var(--ink);font-size:1.05rem;line-height:1.7}
+.summary-card p + p{margin-top:14px;color:var(--muted);font-size:.98rem}
+.metrics{display:grid;gap:12px}
+.metric{
+  background:var(--accent-soft);border-radius:var(--radius);padding:20px 22px;
+  transition:transform .2s;
+}
+.metric:hover{transform:translateY(-2px)}
+.metric .val{font:700 1.6rem var(--head);color:var(--ink);letter-spacing:-.02em;line-height:1.1}
+.metric .lab{font-weight:600;font-size:.9rem;margin-top:2px}
+.metric .desc{font-size:.85rem;color:var(--muted);margin-top:6px;line-height:1.5}
+
+/* ---- Experiencia ---- */
+.timeline{position:relative;display:grid;gap:0}
+.timeline-item{
+  display:grid;grid-template-columns:180px 1fr;gap:32px;
+  padding:28px 0;border-top:1px solid var(--line);
+}
+.timeline-item:first-child{border-top:none;padding-top:0}
+.timeline-meta{font-size:.9rem;color:var(--muted);line-height:1.5}
+.timeline-meta strong{display:block;font-weight:600;color:var(--ink);font-size:.95rem}
+.timeline-content h3{font-size:1.2rem;margin-bottom:6px;letter-spacing:-.01em}
+.timeline-content ul{
+  margin:10px 0 0;padding-left:18px;display:grid;gap:8px;
+  color:var(--muted);font-size:.98rem;
+}
+.timeline-content li::marker{color:var(--accent)}
+
+/* ---- Habilidades ---- */
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.skill-block{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px;
+}
+.skill-block h3{font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.skill-grid{display:flex;flex-wrap:wrap;gap:8px}
+.skill-tag{
+  font:500 .88rem var(--body);padding:7px 14px;border-radius:6px;
+  border:1px solid var(--line);background:var(--bg);color:var(--ink);
+  cursor:pointer;transition:all .15s;position:relative;
+}
+.skill-tag:hover{border-color:var(--accent);background:var(--accent-soft)}
+.skill-tag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.skill-tooltip{
+  position:absolute;bottom:calc(100% + 8px);left:50%;translate:-50% 0;
+  background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:8px;
+  font:400 .85rem/1.4 var(--body);width:max-content;max-width:240px;
+  opacity:0;pointer-events:none;transition:opacity .15s;z-index:20;text-align:left;
+}
+.skill-tag.active .skill-tooltip{opacity:1}
+.skill-tag.active::after{
+  content:"";position:absolute;top:calc(100% + 2px);left:50%;translate:-50% 0;
+  border:5px solid transparent;border-top-color:var(--ink);
+}
+
+/* ---- Formación ---- */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.edu-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px;
+}
+.edu-card h3{font-size:1.1rem;margin-bottom:4px}
+.edu-card .inst{font-size:.9rem;color:var(--muted);margin-bottom:10px}
+.edu-card p{font-size:.92rem;color:var(--muted);line-height:1.6}
+
+/* ---- Contacto ---- */
+.contact-section{
+  background:var(--surface);border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);margin-top:88px;padding:72px 0;
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.contact-methods{display:grid;gap:10px}
+.contact-chip{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;border-radius:10px;border:1px solid var(--line);
+  background:var(--bg);text-decoration:none;color:var(--ink);
+  font:500 .95rem var(--body);cursor:pointer;transition:border-color .15s,background .15s;
+}
+.contact-chip:hover{border-color:var(--accent);background:var(--accent-soft)}
+.contact-chip .ico{
+  width:36px;height:36px;border-radius:8px;background:var(--accent-soft);
+  display:grid;place-items:center;font-size:1rem;flex-shrink:0;
+}
+.contact-chip .txt strong{display:block;font-weight:600;font-size:.92rem}
+.contact-chip .txt span{font-size:.82rem;color:var(--muted);word-break:break-all}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-weight:600;font-size:.9rem;margin-bottom:6px}
+.form-group input,.form-group textarea{
+  width:100%;padding:12px 14px;font:inherit;font-size:.95rem;
+  border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);
+  transition:border-color .15s,box-shadow .15s;
+}
+.form-group input:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);
+}
+.form-group .error{color:var(--highlight);font-size:.82rem;margin-top:4px;min-height:1.1em}
+.form-group.invalid input,.form-group.invalid textarea{border-color:var(--highlight)}
+.form-footer{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.form-hint{font-size:.85rem;color:var(--muted);margin-top:12px}
+
+/* ---- Footer ---- */
+.site-footer{
+  max-width:1120px;margin:auto;padding:28px 24px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-size:.85rem;color:var(--muted);
+}
+
+/* ---- Botón subir + Toast ---- */
+#back-to-top{
+  position:fixed;right:24px;bottom:24px;width:44px;height:44px;
+  border-radius:50%;border:none;background:var(--accent);color:#fff;
+  font-size:1.1rem;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .15s;
+  z-index:900;
+}
+#back-to-top.show{opacity:1;pointer-events:auto}
+#back-to-top:hover{transform:translateY(-3px)}
+#toast{
+  position:fixed;left:50%;bottom:28px;translate:-50% 16px;
+  background:var(--ink);color:var(--bg);padding:12px 22px;border-radius:8px;
+  font-size:.9rem;opacity:0;pointer-events:none;transition:all .3s;z-index:9999;
+  max-width:90vw;text-align:center;
+}
+#toast.show{opacity:1;translate:-50% 0}
+
+/* ---- Responsive ---- */
+@media(max-width:860px){
+  .nav{
+    position:absolute;top:100%;left:0;right:0;flex-direction:column;
+    background:var(--bg);padding:12px 24px 20px;border-bottom:1px solid var(--line);
+    display:none;gap:2px;
+  }
+  .nav.open{display:flex}
+  #menu-toggle{display:grid}
+  .profile-grid,.skills-layout,.edu-grid,.contact-grid{grid-template-columns:1fr}
+  .timeline-item{grid-template-columns:1fr;gap:8px}
+  .timeline-meta{display:flex;gap:12px;align-items:baseline}
+  .timeline-meta strong{font-size:.9rem}
+  .contact-grid{gap:32px}
+  .hero{min-height:auto;padding-top:110px;padding-bottom:64px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ---- Impresión / PDF ---- */
+@media print{
+  @page{margin:16mm}
+  .topbar,#back-to-top,#toast,.hero-cta,.hero-status,.contact-section,.site-footer,.section-label::before{display:none!important}
+  body{background:#fff;color:#000;font-size:10.5pt}
+  .hero{min-height:0;padding:0 0 20px;color:#000;background:none;border-bottom:2px solid #000}
+  .hero h1,.hero .sub,.hero .contact-row span{color:#000}
+  .hero .contact-row span{border:1px solid #999;background:none;padding:2px 6px;font-size:9pt}
+  .hero h1{font-size:22pt}
+  section{padding:20px 0 0;break-inside:avoid}
+  h2{font-size:14pt;border-bottom:1px solid #000;padding-bottom:4px}
+  .summary-card,.skill-block,.edu-card{break-inside:avoid;border:1px solid #ccc;box-shadow:none;padding:16px}
+  .metric{background:#f2f2f2;border:1px solid #ccc;padding:10px}
+  .timeline-item{grid-template-columns:140px 1fr;gap:20px}
+  .skill-tag{border:1px solid #ccc;background:#f8f8f8;padding:4px 10px;font-size:9pt}
+  .skill-tooltip{display:none}
+  a{color:#000;text-decoration:none}
+  .container{padding:0}
+}
+</style>
+</head>
+<body>
+<a class="sr" href="#perfil">Saltar al contenido</a>
+
+<!-- Barra superior -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#inicio">Edison Ordoñez</a>
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a href="#perfil">Perfil</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#formacion">Formación</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <button class="icon-btn" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">◐</button>
+    <button class="icon-btn" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section id="inicio" class="hero">
+  <span class="hero-status"><span class="dot" aria-hidden="true"></span> Disponible para prácticas y roles junior en TI</span>
+  <h1>Edison Ordoñez</h1>
+  <p class="sub">Estudiante de Ingeniería en Sistemas (EPN) con experiencia real en soporte IT y atención al cliente. Traduzco problemas técnicos en soluciones claras.</p>
+  <div class="contact-row">
+    <span>Quito, Ecuador</span>
+    <span>098 526 6552</span>
+    <span>EdisonFOrdonez@gmail.com</span>
+  </div>
+  <div class="hero-cta">
+    <button class="btn btn-solid" id="download-cv" type="button">Descargar CV (PDF)</button>
+    <a href="#contacto" class="btn btn-outline">Contactar ahora →</a>
+  </div>
+</section>
+
+<!-- Contenido principal -->
+<main class="container">
+
+  <!-- Perfil -->
+  <section id="perfil">
+    <div class="section-label">Perfil</div>
+    <h2>Resumen profesional</h2>
+    <p class="lead">Lo que aporto a un equipo de TI o soporte.</p>
+    <div class="profile-grid">
+      <div class="summary-card">
+        <p>Profesional en formación con un perfil híbrido: combino una base algorítmica sólida (5.º semestre de Sistemas en la EPN) con habilidades de comunicación forjadas en un contact center de alto volumen.</p>
+        <p>Mi experiencia en atención al cliente me dio resiliencia, manejo de crisis y la capacidad de explicar conceptos técnicos a usuarios no técnicos. Aprendo rápido, documento con precisión y me adapto a entornos digitales con curva de aprendizaje acelerada.</p>
+      </div>
+      <div class="metrics">
+        <div class="metric">
+          <div class="val">5.º semestre</div>
+          <div class="lab">Ingeniería en Sistemas · EPN</div>
+          <div class="desc">Bases de datos, algoritmos, arquitectura de software y análisis de sistemas.</div>
+        </div>
+        <div class="metric">
+          <div class="val">1 año</div>
+          <div class="lab">Atención al cliente & CRM</div>
+          <div class="desc">Resolución de conflictos, CSAT/FCR y comunicación asertiva en entornos de alta presión.</div>
+        </div>
+        <div class="metric">
+          <div class="val">B1</div>
+          <div class="lab">Inglés técnico</div>
+          <div class="desc">Lectura de documentación oficial y comunicación con usuarios.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiencia -->
+  <section id="experiencia">
+    <div class="section-label">Trayectoria</div>
+    <h2>Experiencia profesional</h2>
+    <p class="lead">Roles donde he resuelto problemas reales y documentado procesos.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <strong>2024 — 2025</strong>
+          1 año
+        </div>
+        <div class="timeline-content">
+          <h3>Especialista en Atención al Cliente y Resolución de Conflictos</h3>
+          <p>Call Center (confidencial) · Quito</p>
+          <ul>
+            <li>Gestioné requerimientos de usuarios manteniendo altos índices de CSAT y FCR en un entorno de alto volumen.</li>
+            <li>Documenté y escalé incidencias técnicas usando plataformas CRM, asegurando trazabilidad y seguimiento.</li>
+            <li>Apliqué comunicación asertiva para resolver controversias y mantener la calma bajo presión.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <strong>2021</strong>
+          3 meses
+        </div>
+        <div class="timeline-content">
+          <h3>Asistente en el Área de Sistemas</h3>
+          <p>SICONTAC CENTER S.A. · Quito</p>
+          <ul>
+            <li>Recopilé y salvaguardé datos personales garantizando integridad y confidencialidad.</li>
+            <li>Realicé mantenimiento, preparación y despliegue técnico de estaciones de computación.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Habilidades -->
+  <section id="habilidades">
+    <div class="section-label">Capacidades</div>
+    <h2>Stack y competencias clave</h2>
+    <p class="lead">Toca cada habilidad para ver el contexto de uso.</p>
+    <div class="skills-layout">
+      <div class="skill-block">
+        <h3>💻 Técnicas</h3>
+        <div class="skill-grid" id="skills-tech"></div>
+      </div>
+      <div class="skill-block">
+        <h3>🤝 Transferibles</h3>
+        <div class="skill-grid" id="skills-soft"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formación -->
+  <section id="formacion">
+    <div class="section-label">Educación</div>
+    <h2>Formación académica</h2>
+    <p class="lead">Base técnica y formación complementaria.</p>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <h3>Ingeniería en Sistemas de Información</h3>
+        <div class="inst">Escuela Politécnica Nacional (EPN) · 5.º semestre, en curso</div>
+        <p>Enfoque: Arquitectura de Software, Bases de Datos, Análisis de Sistemas y Estructuras de Datos.</p>
+      </div>
+      <div class="edu-card">
+        <h3>Bachillerato Técnico en Contabilidad</h3>
+        <div class="inst">Unidad Educativa Fiscal "Luxemburgo"</div>
+        <p>Formación base en gestión administrativa, análisis financiero y manejo de herramientas ofimáticas.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Contacto -->
+<section id="contacto" class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">Contacto</div>
+        <h2>Hablemos</h2>
+        <p class="lead" style="margin-bottom:20px">Elige el canal que prefieras. Respondo a la brevedad.</p>
+        <div class="contact-methods">
+          <button class="contact-chip" type="button" data-copy="EdisonFOrdonez@gmail.com">
+            <span class="ico" aria-hidden="true">✉️</span>
+            <span class="txt"><strong>Copiar correo</strong><span>EdisonFOrdonez@gmail.com</span></span>
+          </button>
+          <button class="contact-chip" type="button" data-copy="0985266552">
+            <span class="ico" aria-hidden="true">📞</span>
+            <span class="txt"><strong>Copiar teléfono</strong><span>098 526 6552</span></span>
+          </button>
+          <a class="contact-chip" href="https://wa.me/593985266552" target="_blank" rel="noopener">
+            <span class="ico" aria-hidden="true">💬</span>
+            <span class="txt"><strong>Abrir WhatsApp</strong><span>Mensaje directo</span></span>
+          </a>
+        </div>
+      </div>
+      <form id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="nombre">Nombre o empresa</label>
+          <input id="nombre" autocomplete="name" placeholder="Ej. Nombre del reclutador" required>
+          <div class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input id="email" type="email" autocomplete="email" placeholder="ejemplo@empresa.com" required>
+          <div class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" rows="4" maxlength="500" placeholder="Cuéntame tu propuesta u oferta laboral" required></textarea>
+          <div class="error"></div>
+        </div>
+        <div class="form-footer">
+          <button class="btn btn-accent" type="submit">Enviar mensaje</button>
+          <button class="btn btn-ghost" type="reset">Limpiar</button>
+        </div>
+        <p class="form-hint">Al enviar, se abrirá tu aplicación de correo con el mensaje listo.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span>© <span id="year"></span> Edison Felipe Ordoñez Ortiz</span>
+  <span>Quito, Ecuador</span>
+</footer>
+
+<button id="back-to-top" aria-label="Volver arriba">↑</button>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+/* ---- Tema ---- */
+const root=document.documentElement, themeBtn=$('#theme-toggle');
+const savedTheme=(()=>{try{return localStorage.getItem('theme')}catch(e){return null}})();
+function applyTheme(dark){
+  dark?root.setAttribute('data-theme','dark'):root.removeAttribute('data-theme');
+  themeBtn.textContent=dark?'☀':'◐';
+  themeBtn.setAttribute('aria-label',dark?'Cambiar a modo claro':'Cambiar a modo oscuro');
+}
+applyTheme(savedTheme?savedTheme==='dark':matchMedia('(prefers-color-scheme: dark)').matches);
+themeBtn.onclick=()=>{
+  const dark=!root.hasAttribute('data-theme');
+  applyTheme(dark);
+  try{localStorage.setItem('theme',dark?'dark':'light')}catch(e){}
+};
+
+/* ---- Toast ---- */
+let toastTimer;
+function showToast(msg){
+  const t=$('#toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+/* ---- Menú móvil ---- */
+const nav=$('#nav'), menuBtn=$('#menu-toggle');
+menuBtn.onclick=()=>{
+  const open=nav.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded',open);
+};
+nav.addEventListener('click',e=>{
+  if(e.target.tagName==='A'){
+    nav.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded','false');
+  }
+});
+
+/* ---- Navegación activa + barra de progreso ---- */
+const navLinks=$$('.nav a');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+$$('section[id]').forEach(s=>observer.observe(s));
+
+addEventListener('scroll',()=>{
+  const h=root.scrollHeight-innerHeight;
+  $('#back-to-top').classList.toggle('show',scrollY>500);
+},{passive:true});
+$('#back-to-top').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+/* ---- Habilidades con tooltip ---- */
+const techSkills=[
+  {name:'Python', tip:'Scripting, automatización y análisis de datos básicos.'},
+  {name:'Java', tip:'POO y estructuras de datos.'},
+  {name:'C++', tip:'Gestión de memoria y algoritmos.'},
+  {name:'JavaScript', tip:'Lógica de interactividad y desarrollo web.'},
+  {name:'SQL (MySQL/Postgres)', tip:'Diseño de esquemas y consultas.'},
+  {name:'Windows / macOS', tip:'Entornos de soporte y troubleshooting.'},
+];
+const softSkills=[
+  {name:'Comunicación asertiva', tip:'Traduzco requerimientos técnicos a lenguaje claro.'},
+  {name:'Resolución de conflictos', tip:'Manejo de crisis y usuarios difíciles.'},
+  {name:'Documentación técnica', tip:'Registro preciso de incidencias y procesos.'},
+  {name:'Trabajo bajo presión', tip:'Alto volumen y SLA ajustados.'},
+  {name:'Inglés B1 técnico', tip:'Lectura de documentación y soporte.'},
+];
+
+function renderSkills(containerId, skills){
+  const el=document.getElementById(containerId);
+  el.innerHTML=skills.map((s,i)=>`
+    <button class="skill-tag" type="button" data-tip="${s.tip}" aria-pressed="false">
+      ${s.name}
+      <span class="skill-tooltip" role="tooltip">${s.tip}</span>
+    </button>`).join('');
+  el.addEventListener('click',e=>{
+    const tag=e.target.closest('.skill-tag');
+    if(!tag)return;
+    const active=tag.getAttribute('aria-pressed')==='true';
+    el.querySelectorAll('.skill-tag').forEach(t=>t.setAttribute('aria-pressed','false'));
+    if(!active) tag.setAttribute('aria-pressed','true');
+  });
+}
+renderSkills('skills-tech',techSkills);
+renderSkills('skills-soft',softSkills);
+
+/* ---- Descargar CV: imprimir ---- */
+$('#download-cv').onclick=()=>{
+  showToast('Preparando tu CV… Elige "Guardar como PDF" en el diálogo.');
+  setTimeout(()=>print(),600);
+};
+
+/* ---- Copiar al portapapeles ---- */
+$$('[data-copy]').forEach(btn=>{
+  btn.onclick=async()=>{
+    const text=btn.dataset.copy;
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast('Copiado: '+text);
+    }catch(e){
+      showToast('No se pudo copiar. Selecciona el texto manualmente.');
+    }
+  };
+});
+
+/* ---- Formulario ---- */
+const form=$('#contact-form');
+const validators={
+  nombre:v=>v.trim().length>=2||'Escribe tu nombre o el de tu empresa.',
+  email:v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)||'Escribe un correo válido.',
+  mensaje:v=>v.trim().length>=10||'Escribe al menos 10 caracteres.'
+};
+function validateField(el){
+  const group=el.closest('.form-group');
+  const result=validators[el.id](el.value);
+  group.classList.toggle('invalid',result!==true);
+  group.querySelector('.error').textContent=result===true?'':result;
+  return result===true;
+}
+$$('#contact-form input, #contact-form textarea').forEach(el=>{
+  el.addEventListener('blur',()=>validateField(el));
+  el.addEventListener('input',()=>{
+    if(el.closest('.form-group').classList.contains('invalid')) validateField(el);
+  });
+});
+form.onsubmit=e=>{
+  e.preventDefault();
+  const fields=$$('#contact-form input, #contact-form textarea');
+  const allValid=fields.map(validateField).every(Boolean);
+  if(!allValid){
+    fields.find(f=>f.closest('.form-group').classList.contains('invalid')).focus();
+    return;
+  }
+  const body=`${$('#mensaje').value}\n\n— ${$('#nombre').value} (${$('#email').value})`;
+  location.href=`mailto:EdisonFOrdonez@gmail.com?subject=${encodeURIComponent('Contacto desde tu portafolio: '+$('#nombre').value)}&body=${encodeURIComponent(body)}`;
+  showToast('Abriendo tu aplicación de correo…');
+  form.reset();
+};
+form.onreset=()=>{
+  setTimeout(()=>{
+    $$('.form-group').forEach(g=>{
+      g.classList.remove('invalid');
+      g.querySelector('.error').textContent='';
+    });
+  });
+};
+
+$('#year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
